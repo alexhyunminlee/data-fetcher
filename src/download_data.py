@@ -18,6 +18,7 @@ baseline_oedi_path = "nrel-pds-building-stock/end-use-load-profiles-for-us-build
 def download_data(output_path, upgrade_id, year, version):
     # Read stdin input. Assume it's a single building id
     building_id = int(sys.stdin.read().strip())
+    upgrade_id = int(upgrade_id)
     download_name = f"bldg{building_id:07}-up{upgrade_id:02}"
     # Create directory for downloaded data
     os.makedirs(output_path, exist_ok=True)
