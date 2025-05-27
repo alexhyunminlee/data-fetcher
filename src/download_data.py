@@ -12,13 +12,12 @@ baseline_oedi_path = "nrel-pds-building-stock/end-use-load-profiles-for-us-build
 
 @click.command()
 @click.option('--output_path', required=True, type=click.Path(), help='Directory to download data into')
+@click.option('--upgrade_id', required=True, type=click.Path(), help='Directory to download data into')
 @click.option('--year', default="2024", show_default=True, help='Building data release year')
 @click.option('--version', default="resstock_tmy3_release_2", show_default=True, help='Building data release version')
-def download_data(output_path, year, version):
-    # Read stdin input. Assume it's a single "building_id-upgrade_id" in that format
-    input = sys.stdin.read().strip()
-    building_id = int(input.split('-')[0])
-    upgrade_id = int(input.split('-')[1])
+def download_data(output_path, upgrade_id, year, version):
+    # Read stdin input. Assume it's a single building id
+    building_id = int(sys.stdin.read().strip())
     download_name = f"bldg{building_id:07}-up{upgrade_id:02}"
     # Create directory for downloaded data
     os.makedirs(output_path, exist_ok=True)
